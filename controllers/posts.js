@@ -21,3 +21,16 @@ module.exports.createPost = async function (req, res) {
         })
     }
 }
+
+module.exports.findAllPosts = async function (req, res) {
+    try {
+        let posts = await Post.findAll({ include: User });
+        return res.status(200).json(posts);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: 'Internal Server error'
+        })
+    }
+
+}
